@@ -1,7 +1,10 @@
-const select = document.querySelectorAll('select');
-const input = document.querySelectorAll('input');
-const icons = document.querySelector('.fi fi-af');
 
+const currencyEl_one= document.getElementById('currency-one');
+const currencyEl_two= document.getElementById('currency-two');
+const amountEl_one= document.getElementById('amount-one');
+const amountEl_two= document.getElementById('amount-two');
+
+const swap = document.getElementById('swap');
 
 const API_URL = 'https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W'
 let html= '';
@@ -16,43 +19,55 @@ async function currency(url){
     const dataCurrency = await res.json()
     const{data} = dataCurrency;
     console.log(data);
+    return data
+}
+
+async function renderCurrency(data){
+   
     const arrKeys = Object.keys(data);
     [arrKeys[0],arrKeys[30]]= [arrKeys[30],arrKeys[0]];  /*ı choose USD as initial element */
-    console.log(arrKeys)
-   
-    // console.log(arrKeys);
     arrKeys.map(item=>{
         return html += `<option value="${item}" placeholder="0">${item}</option>`;
-    });
-    
-    for(let i =0; i<select.length; i++){
-        select[i].innerHTML =html;
+    })
+    currencyEl_one.innerHTML = html;
+    currencyEl_two.innerHTML = html;
+    console.log(currencyEl_one)
+    console.log(currencyEl_one.value);
+    console.log(data['TRY'])
+    return calculate(data);
+
+ function calculate(data){
+        amountEl_one.addEventListener('keyup', ()=>{
+            amountEl_two.value = amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value];
+        });
+        amountEl_two.addEventListener('keyup', ()=>{
+            amountEl_one.value = amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value];
+        });
+         currencyEl_one.addEventListener('change', ()=>{
+        amountEl_two.value = amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value];
+        });
+        currencyEl_one.addEventListener('change', ()=>{
+            amountEl_one.value = amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value];
+        });
+        swap.addEventListener('click', ()=>{
+            let temp = currencyEl_one.value;
+            console.log(currencyEl_one)
+            currencyEl_one.value=currencyEl_two.value;
+            currencyEl_two=temp;
+            calculate(data);
+        })
     }
-    console.log(select[0]);
-
-    input[0].addEventListener('keyup', ()=>{
-        input[1].value = input[0].value * data[select[1].value] / data[select[0].value];
-    });
-
-    input[1].addEventListener('keyup', ()=>{
-        input[0].value = input[1].value * data[select[0].value] / data[select[1].value]
-    });
-
-    select[0].addEventListener('change', ()=>{
-        input[1].value = input[0].value * data[select[1].value] / data[select[0].value];
-    });
-
-    select[1].addEventListener('change', ()=>{
-        input[0].value = input[1].value * data[select[0].value] / data[select[1].value]
-    });
-
-
 
 }
+
+   
+ 
+
 async function main() {
 
     try{
-      await currency(API_URL);
+     const data= await currency(API_URL);
+     const currencyDeploy = await renderCurrency(data);
       
     }catch(error){
       console.log(error)
