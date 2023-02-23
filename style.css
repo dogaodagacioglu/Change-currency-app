@@ -1,10 +1,23 @@
 :root {
-    --primary-color: #0953b4;
+    --color1: rgb(162, 162, 144, 0.7);
+    --color2: rgb(220, 219, 217);
+    --color3: rgb(55, 89, 52);
+    --color4: rgb(215, 201, 133);
+    --color5: rgb(246, 237, 240);
+    --color6: rgb(229, 54, 6);
+    --color7: hwb(121 20% 40%);
+    --color8: rgb(55, 89, 52, 0.8);
+    --color9: rgb(246, 237, 240, 0.7);
+    --centeredClassWidth: 78%;
+  }
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-
 body {
-    
     box-sizing: border-box;
     border:solid;
     width: 100%;
@@ -18,12 +31,10 @@ body {
     height: 80vh;
 }
 #header{
-    margin-top: 0;
-    background-color: grey;
     width: 100%;
 }
 h2{
-    color : var(--primary-color);
+    color : blue;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
@@ -31,7 +42,7 @@ h2{
 }
 
 #currency-img{
-    margin-bottom: 30px;
+    margin: 20px;
 }
 
 #swap{
@@ -41,7 +52,7 @@ h2{
     cursor: pointer;
     font-size: 12px;
     border-radius:5px ;
-    padding: 5px 12px;
+    padding: 7px 15px;
     margin:10px 0;
 }
 
