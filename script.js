@@ -46,36 +46,36 @@ async function renderCurrency(data){
     });
 
     currencyEl_two.innerHTML = html_two;
-    amountEl_two.value = amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value];
+    amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
     return calculate(data)
 }
 
     function calculate(data){
         
         amountEl_one.addEventListener('keyup', ()=>{
-            amountEl_two.value = amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value];
+            amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
            
         });
         amountEl_two.addEventListener('keyup', ()=>{
-            amountEl_one.value = amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value];
+            amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
         });
          currencyEl_one.addEventListener('change', ()=>{
-        amountEl_two.value = amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value];
+        amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
         chart(url_chart,currencyEl_one,currencyEl_two);
         });
         currencyEl_two.addEventListener('change', ()=>{
             if(amountEl_two.value !== null){
-                amountEl_two.value = data[currencyEl_two.value] / data[currencyEl_one.value];;
+                amountEl_two.value = (data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);;
             }
-            amountEl_one.value = amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value];
+            amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
         swap.addEventListener('click', ()=>{
             const temp = currencyEl_one.value;
             currencyEl_one.value=currencyEl_two.value;
             currencyEl_two.value=temp;
-            amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value])/ data[currencyEl_one.value];
-            amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value]) / data[currencyEl_two.value];
+            amountEl_two.value = ((amountEl_one.value * data[currencyEl_two.value])/ data[currencyEl_one.value]).toFixed(5);
+            amountEl_one.value = ((amountEl_two.value * data[currencyEl_one.value]) / data[currencyEl_two.value]).toFixed(5);
            
         })
     }

@@ -1,25 +1,32 @@
 
 export const today = new Date();
 export const endDay = String(today.getDate()-1).padStart(2, '0');
-export const startDay = String(today.getDate()-7).padStart(2, '0');
+export const startDay = String(today.getDate()-10).padStart(2, '0');
 export const mont = String(today.getMonth() + 1).padStart(2, '0');
 export const year = today.getFullYear();
 
 export const dateTo = year + '-' + mont + '-' + endDay;
 export const dateFrom = year + '-' + mont + '-' + startDay;
 
+
+
 let myChart;
+let myChart2;
 const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`
 
   export const chart =  async (url,valueOne,valueTwo) =>{
     const res = await fetch(url);
     const dateHistory = await res.json();
     const { data } = dateHistory;
-    console.log(data)
 
     if (myChart) {
       myChart.destroy();
     }
+
+    if (myChart2) {
+      myChart2.destroy();
+    }
+  
 
     const audData = [];
     for (const date in data) {
@@ -36,17 +43,35 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
     }
 
     const ctx = document.getElementById('myChart');
+    const ctx2 = document.getElementById('myChart2');
   
      myChart= new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10'],
         datasets: [
           {
             label: `${valueOne.value}`,
             data: audData,
             borderWidth: 1,
           },
+        ],
+      },
+  
+      options: {
+        scales: {
+          y: {    
+            beginAtZero:true
+          },
+        },
+      },
+    });
+    
+    myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        datasets: [
           {
             label: `${valueTwo.value}`,
             data: audData2,
@@ -63,7 +88,6 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
         },
       },
     });
-  
   }
 
    // // const audExchangeRateNov15 = data['2021-11-15']['AUD'];
