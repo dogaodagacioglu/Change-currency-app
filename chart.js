@@ -9,7 +9,6 @@ export const dateTo = year + '-' + mont + '-' + endDay;
 export const dateFrom = year + '-' + mont + '-' + startDay;
 
 
-
 let myChart;
 let myChart2;
 const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`
@@ -18,7 +17,10 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
     const res = await fetch(url);
     const dateHistory = await res.json();
     const { data } = dateHistory;
+    console.log(data);
 
+    const labelDate = Object.keys(data);
+ 
     if (myChart) {
       myChart.destroy();
     }
@@ -46,14 +48,16 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
     const ctx2 = document.getElementById('myChart2');
   
      myChart= new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10'],
+        labels: labelDate,
         datasets: [
           {
-            label: `${valueOne.value}`,
+            label: `${valueOne.value}/USD`,
+            backgroundColor:'yellow',
             data: audData,
-            borderWidth: 1,
+            tension:0.4,
+            yAxisID:'percentage',
           },
         ],
       },
@@ -63,19 +67,25 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
           y: {    
             beginAtZero:true
           },
+          x: {
+            ticks : {
+              maxTicksLimit: 3,
+            }
+          }
         },
       },
     });
     
     myChart2 = new Chart(ctx2, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+        labels: labelDate,
         datasets: [
           {
-            label: `${valueTwo.value}`,
+            label: `${valueTwo.value}/USD`,
             data: audData2,
-            borderWidth: 1,
+            tension: 0.4,
+            yAxisID:'percentage',
           },
         ],
       },
@@ -85,6 +95,11 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
           y: {
             beginAtZero: true,
           },
+          x: {
+            ticks : {
+              maxTicksLimit: 3,
+            }
+          }
         },
       },
     });
