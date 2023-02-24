@@ -9,7 +9,7 @@
     --color8: rgb(55, 89, 52, 0.8);
     --color9: rgb(246, 237, 240, 0.7);
     
-    --centeredClassWidth: 78%;
+    --centeredClassWidth: 80%;
   }
   
 *{
@@ -59,37 +59,57 @@ h2{
     margin: 20px;
     font-size: 2em;
 }
+p {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
 
-#currency-img{
-    margin: 20px;
+.box-input {
+    display: flex;
+    justify-content: space-between;
+    width: var(--centeredClassWidth);
 }
 
 #swap{
-    background-color: red;
+    background-color:var(--color3);
     border: none;
     color: white;
     cursor: pointer;
     font-size: 12px;
     border-radius:5px ;
-    padding: 7px 15px;
-    margin:10px 0;
+    padding: 9px 20px;
+    margin-top: 20px;
 }
 
 input,select{
-    width:250px;
-    height: 30px;
+    max-width:270px;
+    height: 35px;
     border:1px solid lightblue;
-    outline: #4c91af solid 2px;
+    /* outline: #4c91af solid 2px; */
+    border-radius: 10px;
+    font-size: 1.2em;
 }
 
 input {
     background-color: transparent;
 }
+
+input[type=number]{
+    padding-left: 10px;
+}
+
+input[type=number]:focus {
+    outline:var(--color2) solid 1px  ;
+}
+
 select{
-    width: 100px;
-    margin-left: 150px;
+    width: 80px;
     letter-spacing: 2px;
 }
+
+select:focus {
+    outline: var(--color2) solid 1px; 
+  }
 
 span{
     color:crimson;
