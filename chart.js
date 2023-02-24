@@ -54,7 +54,8 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
         datasets: [
           {
             label: `${valueOne.value}/USD`,
-            backgroundColor:'yellow',
+            backgroundColor:'#ffb6c1',
+            borderColor:'#f08080',
             data: audData,
             tension:0.4,
             yAxisID:'percentage',
@@ -64,9 +65,6 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
   
       options: {
         scales: {
-          y: {    
-            beginAtZero:true
-          },
           x: {
             ticks : {
               maxTicksLimit: 3,
@@ -83,6 +81,8 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
         datasets: [
           {
             label: `${valueTwo.value}/USD`,
+            backgroundColor:'#f0f8ff',
+            borderColor:'#00ced1',
             data: audData2,
             tension: 0.4,
             yAxisID:'percentage',
@@ -92,9 +92,6 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
   
       options: {
         scales: {
-          y: {
-            beginAtZero: true,
-          },
           x: {
             ticks : {
               maxTicksLimit: 3,
