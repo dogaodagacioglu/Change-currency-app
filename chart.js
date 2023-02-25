@@ -1,7 +1,7 @@
 
 export const today = new Date();
 export const endDay = String(today.getDate()-1).padStart(2, '0');
-export const startDay = String(today.getDate()-10).padStart(2, '0');
+export const startDay = String(today.getDate()-16).padStart(2, '0');
 export const mont = String(today.getMonth() + 1).padStart(2, '0');
 export const year = today.getFullYear();
 
