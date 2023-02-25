@@ -47,10 +47,9 @@
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 80vh;
+    
 }
-#header{
-    width: 100%;
-}
+
 h2{
     color : var(--color3);
     text-transform: uppercase;
@@ -81,10 +80,11 @@ p {
     border: none;
     color: white;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 1em;
     border-radius:5px ;
     padding: 9px 20px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -125,11 +125,64 @@ span{
 
 }
 
-#chart{
+#chart-container{
     display:flex;
+    justify-content: space-between;
+    width: var(--centeredClassWidth);
 }
 
-#graph1,
-#graph2{
-    margin: 20px;
+
+
+
+@media screen and (max-width: 800px) {
+    #container {
+        height: 100vh;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    #chart-container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    input{
+        width: 180px;
+    }
+    
+    p {
+    font-weight: 600;
+    margin-bottom: 3px;
+    }
+
+    #swap {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #container {
+        max-width: 350px;
+        width: 100%;
+    }
+    h2 {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #container {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    input{
+        width: 150px;
+    }
 }

@@ -2,6 +2,7 @@ import { chart } from "./chart.js";
 import { dateFrom } from "./chart.js";
 import { dateTo } from "./chart.js";
 
+
 const currencyEl_one= document.getElementById('currency-one');
 const currencyEl_two= document.getElementById('currency-two');
 const amountEl_one= document.getElementById('amount-one');
@@ -17,6 +18,8 @@ let html= '';
 let html_two ='';
 
 
+
+
 async function currency(url){
 
     const res = await fetch(url);
@@ -26,14 +29,13 @@ async function currency(url){
     const dataCurrency = await res.json()
     const{data} = dataCurrency;
     
-
     return data
 }
 
 async function renderCurrency(data){
   
-   
     const arrKeys = Object.keys(data);
+
     [arrKeys[0],arrKeys[30]]= [arrKeys[30],arrKeys[0]];  /*ı choose USD as initial element */
     arrKeys.map(item=>{
         return html += `<option value="${item}" placeholder="0">${item}</option>`;
@@ -47,7 +49,7 @@ async function renderCurrency(data){
 
     currencyEl_two.innerHTML = html_two;
     amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
-    return calculate(data)
+    return data
 }
 
     function calculate(data){
@@ -74,10 +76,9 @@ async function renderCurrency(data){
         swap.addEventListener('click', ()=>{
             const temp = currencyEl_one.value;
             currencyEl_one.value=currencyEl_two.value;
-            currencyEl_two.value=temp;
+            currencyEl_two.value=temp; /* neden?*/ 
             amountEl_two.value = ((amountEl_one.value * data[currencyEl_two.value])/ data[currencyEl_one.value]).toFixed(5);
             amountEl_one.value = ((amountEl_two.value * data[currencyEl_one.value]) / data[currencyEl_two.value]).toFixed(5);
-           
         })
     }
     
@@ -86,10 +87,11 @@ async function main() {
 
     try{
      const data= await currency(API_URL);
-     const currencyDeploy = await renderCurrency(data)
-      
+     const currencyDeploy = await renderCurrency(data);
+     const CalculatePart =  calculate(data);
     }catch(error){
-      console.log(error)
+      console.error(error)
+      alert('Upps something wrong');
     }
   }
 
