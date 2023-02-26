@@ -23,8 +23,6 @@ let myChart2;
     } 
     const dateHistory = await res.json();
     const { data } = dateHistory;
-   
-    console.log(data);
 
     const labelDate = Object.keys(data);
   
