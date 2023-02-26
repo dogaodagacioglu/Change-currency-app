@@ -18,6 +18,7 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
 
   export const chart =  async (url,valueOne,valueTwo) =>{
     try{
+      console.log(today.getDate());
     const res = await fetch(url);
     const dateHistory = await res.json();
     const { data } = dateHistory;
@@ -102,6 +103,7 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
       },
     });
     }catch{
+      console.log(error);
       alert('Unable to load charts')
     }
   }
