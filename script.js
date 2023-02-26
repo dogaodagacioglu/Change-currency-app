@@ -10,13 +10,13 @@ const amountEl_one= document.getElementById('amount-one');
 const amountEl_two= document.getElementById('amount-two');
 
 const swap = document.getElementById('swap');
-const ctx = document.getElementById('myChart');
 
 const API_URL = 'https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W'
 const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`
 
 let html= '';
 let html_two ='';
+
 chart(url_chart,currencyEl_one,currencyEl_two);
 
 async function currency(url){
@@ -64,7 +64,6 @@ async function renderCurrency(data){
             amountEl_one.value = amountEl_one.value.replace(/[^\d.-]/g, '')
             amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
-            
         });
         currencyEl_two.addEventListener('change', ()=>{
             if(amountEl_two.value !== null){
