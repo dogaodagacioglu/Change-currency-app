@@ -10,7 +10,6 @@ https://dogaodagacioglu.github.io/Change-currency-app/
 
 ```
 public
-└── README
 └── style.css
 src
 └── chart.js
