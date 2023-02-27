@@ -26,7 +26,6 @@ async function currency(url){
     }
     const dataCurrency = await res.json()
     const{data} = dataCurrency;
-    console.log(data);
     return data
 }
 
