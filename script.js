@@ -10,13 +10,13 @@ const amountEl_one= document.getElementById('amount-one');
 const amountEl_two= document.getElementById('amount-two');
 
 const swap = document.getElementById('swap');
-const ctx = document.getElementById('myChart');
 
 const API_URL = 'https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W'
 const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`
 
 let html= '';
-let html_two ='';
+let htmlTwo ='';
+
 chart(url_chart,currencyEl_one,currencyEl_two);
 
 async function currency(url){
@@ -26,6 +26,7 @@ async function currency(url){
     }
     const dataCurrency = await res.json()
     const{data} = dataCurrency;
+    console.log(data);
     return data
 }
 
@@ -33,18 +34,18 @@ async function renderCurrency(data){
   
     const arrKeys = Object.keys(data);
 
-    [arrKeys[0],arrKeys[30]]= [arrKeys[30],arrKeys[0]];  /*ı choose USD as initial element */
+    [arrKeys[0],arrKeys[30]]= [arrKeys[30],arrKeys[0]];  /*I choose USD as initial element */
     arrKeys.map(item=>{
-        return html += `<option value="${item}" placeholder="0">${currencySymbols[item]} ${item}</option>`;
+        return html += `<option value="${item}" >${currencySymbols[item]} ${item}</option>`;
     })
     currencyEl_one.innerHTML = html;
 
-    [arrKeys[0],arrKeys[8]]= [arrKeys[8],arrKeys[0]];
+    [arrKeys[0],arrKeys[8]]= [arrKeys[8],arrKeys[0]];   /*I choose EURO as initial element */
     arrKeys.map(item=>{
-         return html_two +=`<option value="${item}" placeholder="0">${currencySymbols[item]} ${item}</option>`;
+         return htmlTwo +=`<option value="${item}" >${currencySymbols[item]} ${item}</option>`;
     });
+    currencyEl_two.innerHTML = htmlTwo;
 
-    currencyEl_two.innerHTML = html_two;
     amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
     return data
 
@@ -56,20 +57,18 @@ async function renderCurrency(data){
             amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
+        
         amountEl_two.addEventListener('keyup', ()=>{
             amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
+
         currencyEl_one.addEventListener('change', ()=>{
-            amountEl_one.value = amountEl_one.value.replace(/[^\d.-]/g, '')
             amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
-            
         });
+
         currencyEl_two.addEventListener('change', ()=>{
-            if(amountEl_two.value !== null){
-                amountEl_two.value = (data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);;
-            }
             amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
@@ -79,7 +78,7 @@ async function renderCurrency(data){
             currencyEl_one.value=currencyEl_two.value;
             currencyEl_two.value=temp;
             amountEl_two.value = ((amountEl_one.value * data[currencyEl_two.value])/ data[currencyEl_one.value]).toFixed(5);
-            amountEl_one.value = ((amountEl_two.value * data[currencyEl_one.value]) / data[currencyEl_two.value]).toFixed(5);
+            
         })
     }
     

@@ -14,17 +14,18 @@ const ctx2 = document.getElementById('currency-chart-two');
 
 let myChart;
 let myChart2;
-const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`
 
   export const chart =  async (url,valueOne,valueTwo) =>{
     try{
-      console.log(today.getDate());
     const res = await fetch(url);
+    if(!res.ok){
+      throw new Error(`HTTP error!`);
+    } 
     const dateHistory = await res.json();
     const { data } = dateHistory;
 
     const labelDate = Object.keys(data);
- 
+  
     if (myChart) {
       myChart.destroy();
     }
@@ -33,21 +34,19 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
       myChart2.destroy();
     }
   
-
-    const audData = [];
+    const valueData = [];
     for (const date in data) {
       if (data.hasOwnProperty(date)) {
-        audData.push(data[date][valueOne.value]);
+        valueData.push(data[date][valueOne.value]);
       }
     }
 
-    const audData2 = [];
+    const valueData2 = []; 
     for (const date in data) {
       if (data.hasOwnProperty(date)) {
-        audData2.push(data[date][valueTwo.value]);
+        valueData2.push(data[date][valueTwo.value]);
       }
     }
-
   
      myChart= new Chart(ctx, {
       type: 'line',
@@ -58,9 +57,9 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
             label: `${valueOne.value}/USD`,
             backgroundColor:'#ffb6c1',
             borderColor:'#f08080',
-            data: audData,
+            data: valueData,
             tension:0.4,
-            yAxisID:'percentage',
+            yAxisID: 'percentage'
           },
         ],
       },
@@ -85,7 +84,7 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
             label: `${valueTwo.value}/USD`,
             backgroundColor:'#f0f8ff',
             borderColor:'#00ced1',
-            data: audData2,
+            data: valueData2,
             tension: 0.4,
             yAxisID:'percentage',
           },
@@ -107,6 +106,4 @@ const url_chart =`https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW
       alert('Unable to load charts')
     }
   }
-
-   // // const audExchangeRateNov15 = data['2021-11-15']['AUD'];
    
