@@ -57,19 +57,18 @@ async function renderCurrency(data){
             amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
+        
         amountEl_two.addEventListener('keyup', ()=>{
             amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
+
         currencyEl_one.addEventListener('change', ()=>{
-            amountEl_one.value = amountEl_one.value.replace(/[^\d.-]/g, '')
             amountEl_two.value = (amountEl_one.value * data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
+
         currencyEl_two.addEventListener('change', ()=>{
-            // if(amountEl_two.value !== null){
-            //     amountEl_two.value = (data[currencyEl_two.value] / data[currencyEl_one.value]).toFixed(5);;
-            // }
             amountEl_one.value = (amountEl_two.value * data[currencyEl_one.value] / data[currencyEl_two.value]).toFixed(5);
             chart(url_chart,currencyEl_one,currencyEl_two);
         });
@@ -79,6 +78,7 @@ async function renderCurrency(data){
             currencyEl_one.value=currencyEl_two.value;
             currencyEl_two.value=temp;
             amountEl_two.value = ((amountEl_one.value * data[currencyEl_two.value])/ data[currencyEl_one.value]).toFixed(5);
+            
         })
     }
     
