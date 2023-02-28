@@ -10,8 +10,7 @@ const amountEl_two = document.getElementById("amount-two");
 
 const swap = document.getElementById("swap");
 
-const API_URL =
-  "https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W";
+const API_URL = "https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W";
 const url_chart = `https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`;
 
 let html = "";
