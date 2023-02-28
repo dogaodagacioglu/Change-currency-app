@@ -4,7 +4,7 @@ This app is about Finance. You can follow the instant currency values and learn 
 
 ## Demo
 
-https://dogaodagacioglu.github.io/Change-currency-app/
+https://currencyconverterandchart.netlify.app/
 
 ## Structure
 
