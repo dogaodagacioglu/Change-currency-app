@@ -10,20 +10,20 @@ const amountEl_two = document.getElementById("amount-two");
 
 const swap = document.getElementById("swap");
 
-const API_URL = "https://api.freecurrencyapi.com/v1/latest?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W";
-const url_chart = `https://api.freecurrencyapi.com/v1/historical?apikey=J6e4atuaW0NwEQIkh1eMkOAGzdwc1pkZDsDFha5W&date_from=${dateFrom}&date_to=${dateTo}`;
+const API_URL = "https://api.freecurrencyapi.com/v1/latest?apikey=4t1aFkQ1r7wQZWIQaenTPTvrEhB55RGAwQMJLRI6";
+const url_chart = `https://api.freecurrencyapi.com/v1/historical?apikey=4t1aFkQ1r7wQZWIQaenTPTvrEhB55RGAwQMJLRI6&date_from=${dateFrom}&date_to=${dateTo}`;
 
 let html = "";
 let htmlTwo = "";
 
 chart(url_chart, currencyEl_one, currencyEl_two).catch((error) => {
-  alert(`chart cant load:${error.message}`);
+  alert(`chart can't load: ${error.message}`);
 });
 
 async function currency(url) {
   const res = await fetch(url);
   if (!res.ok) {
-    throw new Error(`HTTP error!`);
+    throw Error(`HTTP error!`);
   }
   const dataCurrency = await res.json();
   const { data } = dataCurrency;
@@ -32,7 +32,6 @@ async function currency(url) {
 
 async function renderCurrency(data) {
   const arrKeys = Object.keys(data);
-
   [arrKeys[0], arrKeys[30]] = [
     arrKeys[30],
     arrKeys[0],
@@ -64,7 +63,6 @@ function calculate(data) {
       (amountEl_one.value * data[currencyEl_two.value]) /
       data[currencyEl_one.value]
     ).toFixed(5);
-    chart(url_chart, currencyEl_one, currencyEl_two);
   });
 
   amountEl_two.addEventListener("keyup", () => {
@@ -72,7 +70,6 @@ function calculate(data) {
       (amountEl_two.value * data[currencyEl_one.value]) /
       data[currencyEl_two.value]
     ).toFixed(5);
-    chart(url_chart, currencyEl_one, currencyEl_two);
   });
 
   currencyEl_one.addEventListener("change", () => {

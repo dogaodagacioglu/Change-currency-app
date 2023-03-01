@@ -1,5 +1,3 @@
-
-
 const today = new Date();
 let endDay = String(today.getDate() - 1).padStart(2, "0");
 let endMonth = String(today.getMonth() + 1).padStart(2, "0");
@@ -8,14 +6,14 @@ let startMonth = String(today.getMonth() + 1).padStart(2, "0");
 const year = today.getFullYear();
 
 if (today.getDate() <= 16) {
-   startDay = String(today.getDate() + 14).padStart(2, "0");
-   startMonth = String(today.getMonth()).padStart(2, "0");
+  startDay = String(today.getDate() + 14).padStart(2, "0");
+  startMonth = String(today.getMonth()).padStart(2, "0");
 }
 
 if (today.getDate() === 1) {
-   const lastDayOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-   endDay = String(lastDayOfLastMonth.getDate()).padStart(2, "0");
-   endMonth = String(lastDayOfLastMonth.getMonth() + 1).padStart(2, "0");
+  const lastDayOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+  endDay = String(lastDayOfLastMonth.getDate()).padStart(2, "0");
+  endMonth = String(lastDayOfLastMonth.getMonth() + 1).padStart(2, "0");
 }
 
 export const dateTo = year + "-" + endMonth + "-" + endDay;
@@ -34,7 +32,7 @@ export const chart = async (url, valueOne, valueTwo) => {
   }
   const dateHistory = await res.json();
   const { data } = dateHistory;
-
+  
   const labelDate = Object.keys(data);
 
   if (myChart) {
